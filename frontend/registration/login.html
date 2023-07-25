@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-2 mb-2" style="background-color: #e1f0fc; padding: 20px; border-radius: 10px">
+    <div class="row mb-1">
+        <div class="logo-container">
+            <img
+                    src="{% static 'logo.png' %}"
+                    alt="Hi Platform"
+                    width="170"
+            >
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-1">
+                <h4>Atenção!</h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2">
+                <h4>Você <strong>já está logado!</strong></h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2">
+                <p>Para retornar ao início: <a href="{% url 'users:index' %}">Clique aqui!</a></p>
+            </div>
+        </div>
+    {% else %}
+        {% if form.errors %}
+            <p>
+                {{ form.errors }}
+            </p>
+        {% endif %}
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2">
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <label for="inputEmail" class="form-label">E-mail</label>
+                        <input
+                                type="email"
+                                name="email"
+                                class="form-control rounded-3"
+                                id="inputEmail"
+                                placeholder="Informe seu e-mail"
+                                required
+                        >
+                    </div>
+                    <div class="mb-2">
+                        <label for="inputPassword" class="form-label">Senha</label>
+                        <input
+                                type="password"
+                                name="password"
+                                class="form-control rounded-3"
+                                id="inputPassword"
+                                placeholder="Informe sua senha"
+                                required
+                        >
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="row md-6 mb-2 justify-content-center">
+                            <button type="submit" class="btn btn-primary" style="width: 350px">Login</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row justify-content-center">
+                    <div class="row md-6 mb-2 justify-content-center">
+                        <button type="submit" class="btn btn-primary" style="width: 350px">Cadastre-se</button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="row md-6 mb-2 justify-content-center">
+                        <p class="mt-3">Esqueceu sua senha? <a href="#">Clique aqui!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
