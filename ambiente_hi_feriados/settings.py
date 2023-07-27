@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'base_page.apps.BasePageConfig',
+    'register.apps.RegisterConfig',
 ]
 
 MIDDLEWARE = [

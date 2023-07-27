@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load static %}
-<div class="container mt-2 mb-2" style="background-color: #e1f0fc; padding: 20px; border-radius: 10px">
+<div class="container mt-1 mb-2" style="background-color: #e1f0fc; padding: 20px; border-radius: 10px">
     <div class="row mb-1">
         <div class="logo-container">
             <img
@@ -34,9 +34,9 @@
                 <p class="fw-medium" style="font-size: 12.5px">Token: {{ user.token }}</p>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-5 mb-2">
-                <a href="{% url 'logout' %}">Sair</a>
+        <div class="row justify-content-center align-items-start">
+            <div class="col-md-5 mb-0">
+                <p class="fw-medium" style="font-size: 12.5px">E-mail: {{ user.email }}</p>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-2 overflow-scroll rounded" style="max-height: 250px">
+            <div class="col-md-5 mb-2 overflow-scroll rounded" style="max-height: 210px">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -102,6 +102,11 @@
                         <a href="#" class="btn btn-primary" style="width: 350px">Deletar feriados</a>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2" style="font-size: 12.5px">
+                <p class="fw-medium">Deseja trocar de usuário? <a href="{% url 'logout' %}">Clique aqui!</a></p>
             </div>
         </div>
     {% endif %}

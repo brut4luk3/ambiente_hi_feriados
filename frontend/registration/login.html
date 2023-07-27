@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load static %}
-<div class="container mt-2 mb-2" style="background-color: #e1f0fc; padding: 20px; border-radius: 10px">
+<div class="container mt-1 mb-2" style="background-color: #e1f0fc; padding: 20px; border-radius: 10px">
     <div class="row mb-1">
         <div class="logo-container">
             <img
@@ -30,35 +30,25 @@
         </div>
     {% else %}
         {% if form.errors %}
-            <p>
-                {{ form.errors }}
-            </p>
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-2">
+                    <script>
+                        alert("O e-mail ou senha estão incorretos! Tente novamente.");
+                    </script>
+                </div>
+            </div>
         {% endif %}
         <div class="row justify-content-center">
             <div class="col-md-5 mb-2">
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="mb-2">
-                        <label for="inputEmail" class="form-label">E-mail</label>
-                        <input
-                                type="email"
-                                name="email"
-                                class="form-control rounded-3"
-                                id="inputEmail"
-                                placeholder="Informe seu e-mail"
-                                required
-                        >
+                        <label class="form-label fw-medium">E-mail</label>
+                        {{ form.username }}
                     </div>
-                    <div class="mb-2">
-                        <label for="inputPassword" class="form-label">Senha</label>
-                        <input
-                                type="password"
-                                name="password"
-                                class="form-control rounded-3"
-                                id="inputPassword"
-                                placeholder="Informe sua senha"
-                                required
-                        >
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">Senha</label>
+                        {{ form.password }}
                     </div>
                     <div class="row justify-content-center">
                         <div class="row md-6 mb-2 justify-content-center">
@@ -68,7 +58,7 @@
                 </form>
                 <div class="row justify-content-center">
                     <div class="row md-6 mb-2 justify-content-center">
-                        <button type="submit" class="btn btn-primary" style="width: 350px">Cadastre-se</button>
+                        <a href="{% url 'register:new' %}" class="btn btn-primary" style="width: 350px">Cadastre-se</a>
                     </div>
                 </div>
                 <div class="row justify-content-center">

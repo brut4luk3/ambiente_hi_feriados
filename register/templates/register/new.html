@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-2 mb-2" style="background-color: #e1f0fc; padding: 20px; border-radius: 10px">
+    <div class="row mb-1">
+        <div class="logo-container">
+            <img
+                    src="{% static 'logo.png' %}"
+                    alt="Hi Platform"
+                    width="170"
+            >
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-1">
+                <h4>Atenção!</h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2">
+                <h4>Você <strong>já está logado!</strong></h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2">
+                <p>Para retornar ao início: <a href="{% url 'users:index' %}">Clique aqui!</a></p>
+            </div>
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <label for="inputName" class="form-label fw-medium">Nome</label>
+                        <input
+                                type="text"
+                                name="name"
+                                class="form-control rounded-3"
+                                id="inputName"
+                                placeholder="Informe seu nome"
+                                required
+                        >
+                    </div>
+                    <div class="mb-2">
+                        <label for="inputLastName" class="form-label fw-medium">Sobrenome</label>
+                        <input
+                                type="text"
+                                name="lastname"
+                                class="form-control rounded-3"
+                                id="inputLastName"
+                                placeholder="Informe seu sobrenome"
+                                required
+                        >
+                    </div>
+                    <div class="mb-2">
+                        <label for="inputEmail" class="form-label fw-medium">E-mail</label>
+                        <input
+                                type="email"
+                                name="email"
+                                class="form-control rounded-3"
+                                id="inputEmail"
+                                placeholder="Informe seu e-mail"
+                                required
+                        >
+                    </div>
+                    <div class="mb-2">
+                        <label for="inputPassword" class="form-label fw-medium">Senha</label>
+                        <input
+                                type="password"
+                                name="password"
+                                class="form-control rounded-3"
+                                id="inputPassword"
+                                placeholder="Informe sua senha"
+                                required
+                        >
+                    </div>
+                    <div class="mb-2">
+                        <label for="inputPasswordConfirm" class="form-label fw-medium">Confirmar Senha</label>
+                        <input
+                                type="password"
+                                name="password"
+                                class="form-control rounded-3"
+                                id="inputPasswordConfirm"
+                                placeholder="Confirme sua senha"
+                                required
+                        >
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="row md-6 mb-2 justify-content-center">
+                            <button type="submit" class="btn btn-primary" style="width: 350px">Cadastrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
