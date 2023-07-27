@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from users.models import CustomUser
-
+from django.utils.translation import gettext_lazy as _
 
 def new(request):
 
@@ -12,15 +12,32 @@ def new(request):
     elif request.method == 'POST':
 
         post_data = request.POST
+        forms_email = post_data.get('email')
+        forms_password = post_data.get('password')
+        forms_passwordconfirm = post_data.get('passwordconfirm')
 
-        u = CustomUser(
-            email=post_data.get('email'),
-            password=post_data.get('password'),
-            first_name=post_data.get('name'),
-            last_name=post_data.get('lastname')
-        )
+        if CustomUser.objects.filter(email=forms_email).exists():
+            email_errors = {
+                'unique_email': _('Este e-mail já está sendo utilizado!')
+            }
+            return render(request, 'register/new.html', {'email_errors': email_errors})
 
-        u.set_password(post_data.get("password"))
-        u.save()
+        elif forms_password != forms_passwordconfirm:
+            password_errors = {
+                'unequal_password': _('As senhas não conferem!')
+            }
+            return render(request, 'register/new.html', {'password_errors': password_errors})
 
-        return render(request, 'register/success.html')
+        else:
+            u = CustomUser(
+                email=post_data.get('email'),
+                password=post_data.get('password'),
+                first_name=post_data.get('name'),
+                last_name=post_data.get('lastname')
+            )
+            u.set_password(post_data.get("password"))
+            u.save()
+
+            return render(request, 'register/success.html')
+
+    return render(request, 'register/success.html')

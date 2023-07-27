@@ -33,67 +33,77 @@
             <div class="col-md-5 mb-2">
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <div class="mb-2">
-                        <label for="inputName" class="form-label fw-medium">Nome</label>
-                        <input
-                                type="text"
-                                name="name"
-                                class="form-control rounded-3"
-                                id="inputName"
-                                placeholder="Informe seu nome"
-                                required
-                        >
-                    </div>
-                    <div class="mb-2">
-                        <label for="inputLastName" class="form-label fw-medium">Sobrenome</label>
-                        <input
-                                type="text"
-                                name="lastname"
-                                class="form-control rounded-3"
-                                id="inputLastName"
-                                placeholder="Informe seu sobrenome"
-                                required
-                        >
-                    </div>
-                    <div class="mb-2">
-                        <label for="inputEmail" class="form-label fw-medium">E-mail</label>
-                        <input
-                                type="email"
-                                name="email"
-                                class="form-control rounded-3"
-                                id="inputEmail"
-                                placeholder="Informe seu e-mail"
-                                required
-                        >
-                    </div>
-                    <div class="mb-2">
-                        <label for="inputPassword" class="form-label fw-medium">Senha</label>
-                        <input
-                                type="password"
-                                name="password"
-                                class="form-control rounded-3"
-                                id="inputPassword"
-                                placeholder="Informe sua senha"
-                                required
-                        >
-                    </div>
-                    <div class="mb-2">
-                        <label for="inputPasswordConfirm" class="form-label fw-medium">Confirmar Senha</label>
-                        <input
-                                type="password"
-                                name="password"
-                                class="form-control rounded-3"
-                                id="inputPasswordConfirm"
-                                placeholder="Confirme sua senha"
-                                required
-                        >
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="row md-6 mb-2 justify-content-center">
-                            <button type="submit" class="btn btn-primary" style="width: 350px">Cadastrar</button>
+                        <div class="mb-2">
+                            <label for="inputName" class="form-label fw-medium">Nome</label>
+                            <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control rounded-3"
+                                    id="inputName"
+                                    placeholder="Informe seu nome"
+                                    required
+                            >
                         </div>
-                    </div>
+                        <div class="mb-2">
+                            <label for="inputLastName" class="form-label fw-medium">Sobrenome</label>
+                            <input
+                                    type="text"
+                                    name="lastname"
+                                    class="form-control rounded-3"
+                                    id="inputLastName"
+                                    placeholder="Informe seu sobrenome"
+                                    required
+                            >
+                        </div>
+                        <div class="mb-2">
+                            <label for="inputEmail" class="form-label fw-medium">E-mail</label>
+                            <input
+                                    type="email"
+                                    name="email"
+                                    class="form-control rounded-3"
+                                    id="inputEmail"
+                                    placeholder="Informe seu e-mail"
+                                    required
+                            >
+                        </div>
+                        <div class="mb-2">
+                            <label for="inputPassword" class="form-label fw-medium">Senha</label>
+                            <input
+                                    type="password"
+                                    name="password"
+                                    class="form-control rounded-3"
+                                    id="inputPassword"
+                                    placeholder="Informe sua senha"
+                                    required
+                            >
+                        </div>
+                        <div class="mb-2">
+                            <label for="inputPasswordConfirm" class="form-label fw-medium">Confirmar Senha</label>
+                            <input
+                                    type="password"
+                                    name="passwordconfirm"
+                                    class="form-control rounded-3"
+                                    id="inputPasswordConfirm"
+                                    placeholder="Confirme sua senha"
+                                    required
+                            >
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="row md-6 mb-2 justify-content-center">
+                                <button type="submit" class="btn btn-primary" style="width: 350px">Cadastrar</button>
+                            </div>
+                        </div>
                 </form>
+                {% if email_errors %}
+                    <script>
+                        alert("{{ email_errors.unique_email }}");
+                    </script>
+                {% endif %}
+                {% if password_errors %}
+                    <script>
+                        alert("{{ password_errors.unequal_password }}");
+                    </script>
+                {% endif %}
             </div>
         </div>
     {% endif %}
