@@ -17,18 +17,3 @@ class CustomAuthenticationForm(AuthenticationForm):
         strip=False,
         error_messages={'required': 'Informe a sua senha.'},
     )
-
-class CustomUserCreationForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ('email', 'password', 'first_name', 'last_name')
-
-    def clean(self):
-        cleaned_data = super().clean()
-        email = cleaned_data.get('email')
-
-        User = get_user_model()
-        if User.objects.filter(email=email).exists():
-            self.add_error('email', 'Este e-mail já está em uso. Por favor, use outro.')
-
-        return cleaned_data
