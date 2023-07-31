@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 <div class="container mt-1 mb-2" style="width: 70%; background-color: #e1f0fc; padding: 20px; border-radius: 10px">
-    <div class="row mb-1">
+    <div class="row mb-3">
         <div class="logo-container">
             <img
                     src="{% static 'logo.png' %}"
@@ -46,7 +46,7 @@
                     <tbody>
                     {% for data in listar_datas %}
                         <tr>
-                            <th scope="row">{{ data.data }}</th>
+                            <th scope="row">{{ data.data| date:"d/m/Y" }}</th>
                             <td>{{ data.description }}</td>
                         </tr>
                     {% endfor %}
@@ -58,12 +58,12 @@
             <div class="col-md-5 mb-2">
                 <div class="row justify-content-center">
                     <div class="row md-6 mb-2 justify-content-center">
-                        <a href="{% url 'datas:cadastrar_feriados' %}" class="btn btn-primary" style="width: 350px">Cadastrar feriados</a>
+                        <a href="{% url 'datas:cadastrar_feriados' %}" class="btn btn-primary" style="width: 380px">Cadastrar feriados</a>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="row md-6 mb-2 justify-content-center">
-                        <a href="{% url 'datas:deletar_feriados' %}" class="btn btn-primary" style="width: 350px">Deletar feriados</a>
+                        <a href="{% url 'datas:deletar_feriados' %}" class="btn btn-primary" style="width: 380px">Deletar feriados</a>
                     </div>
                 </div>
             </div>

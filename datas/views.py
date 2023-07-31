@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.contrib import messages
 from datas.models import Feriados
 
 def cadastrar_feriados(request):
@@ -17,7 +19,9 @@ def cadastrar_feriados(request):
 
         f.save()
 
-        return render(request, 'cadastrar/cadastrar_feriados.html')
+        messages.success(request, 'Nova data cadastrada com sucesso!')
+
+        return redirect(reverse('datas:cadastrar_feriados'))
 
 def deletar_feriados(request):
 
