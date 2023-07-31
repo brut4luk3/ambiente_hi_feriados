@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'base_page.apps.BasePageConfig',
     'register.apps.RegisterConfig',
-    'feriados.apps.FeriadosConfig',
+    'datas.apps.DatasConfig',
 ]
 
 MIDDLEWARE = [

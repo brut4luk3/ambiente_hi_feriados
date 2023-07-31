@@ -2,13 +2,13 @@
 
 {% block content %}
 {% load static %}
-<div class="container mt-1 mb-2" style="width: 60%; background-color: #e1f0fc; padding: 20px; border-radius: 10px">
+<div class="container mt-1 mb-2" style="width: 70%; background-color: #e1f0fc; padding: 20px; border-radius: 10px">
     <div class="row mb-1">
         <div class="logo-container">
             <img
                     src="{% static 'logo.png' %}"
                     alt="Hi Platform"
-                    width="170"
+                    width="150"
             >
         </div>
     </div>
@@ -30,18 +30,8 @@
         </div>
     {% else %}
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-0">
-                <p class="fw-medium" style="font-size: 12.5px">Token: {{ user.token }}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center align-items-start">
-            <div class="col-md-5 mb-0">
-                <p class="fw-medium" style="font-size: 12.5px">E-mail: {{ user.email }}</p>
-            </div>
-        </div>
-        <div class="row justify-content-center">
             <div class="col-md-5 mb-2">
-                <h4>Suas datas registradas:</h4>
+                <h5>Clique em uma data para editá-la:</h5>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -54,38 +44,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% for data in listar_datas %}
                         <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
+                            <th scope="row">{{ data.data }}</th>
+                            <td>{{ data.description }}</td>
                         </tr>
-                        <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">22/04/2029</th>
-                            <td>Dia de Dormir</td>
-                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -94,14 +58,24 @@
             <div class="col-md-5 mb-2">
                 <div class="row justify-content-center">
                     <div class="row md-6 mb-2 justify-content-center">
-                        <a href="#" class="btn btn-primary" style="width: 350px">Cadastrar feriados</a>
+                        <a href="{% url 'datas:cadastrar_feriados' %}" class="btn btn-primary" style="width: 350px">Cadastrar feriados</a>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="row md-6 mb-2 justify-content-center">
-                        <a href="#" class="btn btn-primary" style="width: 350px">Deletar feriados</a>
+                        <a href="{% url 'datas:deletar_feriados' %}" class="btn btn-primary" style="width: 350px">Deletar feriados</a>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-0">
+                <p class="fw-medium" style="font-size: 12.5px">Token: {{ user.token }}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-start">
+            <div class="col-md-5 mb-0">
+                <p class="fw-medium" style="font-size: 12.5px">E-mail: {{ user.email }}</p>
             </div>
         </div>
         <div class="row justify-content-center">

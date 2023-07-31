@@ -2,4 +2,15 @@ from django.shortcuts import render
 
 def index(request):
 
-    return render(request, 'inicio/index.html')
+    if request.user.is_authenticated:
+        listar_datas = request.user.feriados_set.all()
+
+        context = {
+            'listar_datas': listar_datas
+        }
+
+        return render(request, 'inicio/index.html', context=context)
+
+    else:
+
+        return render(request, 'inicio/index.html')
