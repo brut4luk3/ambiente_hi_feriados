@@ -47,7 +47,7 @@ def deletar_feriados(request, feriados_id):
 
         feriado_excluido = Feriados.objects.filter(id=feriados_id).delete()
 
-        return render(request, 'deletar/deletar_feriados.html')
+        return render(request, 'deletar/selecionar_feriados.html.html')
 
 def editar_feriados(request, feriados_id):
     if request.method == 'GET':

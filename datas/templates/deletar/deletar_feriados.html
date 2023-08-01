@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-1 mb-1" style="width: 70%; background-color: #2FACAE; padding: 20px; border-radius: 10px">
+    <div class="row mb-3">
+        <div class="logo-container">
+            <img
+                    src="{% static 'logo.png' %}"
+                    alt="Hi Platform"
+                    width="150"
+            >
+        </div>
+    </div>
+    {% if not user.is_authenticated %}
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-1 align-self-center text-center">
+                <h5>Atenção!</h5>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2 align-self-center text-center">
+                <h5>Você não está <strong>logado!</strong></h5>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2 align-self-center text-center">
+                <p>Para realizar o login: <a href="{% url 'login' %}">Clique aqui!</a></p>
+            </div>
+        </div>
+    {% else %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-3 align-self-center text-center">
+                    <h5>Você excluirá a seguinte data:</h5>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-5 align-self-center text-center">
+                    <h4>{{ feriado.data }}</h4>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-2 align-self-center text-center">
+                    <p class="fw-medium">Você confirma esta ação?</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="row md-6 mb-2 justify-content-center">
+                    <button type="submit" class="btn btn-secondary text-white" style="width: 330px">Sim</button>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="row md-6 mb-4 justify-content-center">
+                    <a href="{% url 'datas:selecionar_feriados' %}" class="btn btn-secondary text-white" style="width: 330px">Não</a>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col md-6 mb-0 align-self-center text-center">
+                    <a href="{% url 'datas:selecionar_feriados' %}">Voltar</a>
+                </div>
+            </div>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
