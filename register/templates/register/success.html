@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load static %}
-<div class="container mt-2 mb-2" style="background-color: #e1f0fc; padding: 20px; border-radius: 10px">
+<div class="container mt-1 mb-1" style="background-color: #2FACAE; padding: 20px; border-radius: 10px">
     <div class="row mb-3">
         <div class="logo-container">
             <img
@@ -14,17 +14,17 @@
     </div>
     {% if user.is_authenticated %}
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-1">
+            <div class="col-md-5 mb-1 align-self-center text-center">
                 <h4>Atenção!</h4>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-2">
+            <div class="col-md-5 mb-2 align-self-center text-center">
                 <h4>Você <strong>já está logado!</strong></h4>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-2">
+            <div class="col-md-5 mb-2 align-self-center text-center">
                 <p>Para retornar ao início: <a href="{% url 'users:index' %}">Clique aqui!</a></p>
             </div>
         </div>
