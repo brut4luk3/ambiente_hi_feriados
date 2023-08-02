@@ -43,11 +43,11 @@
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="mb-2">
-                        <label class="form-label fw-medium">E-mail</label>
+                        <label class="form-label fw-medium text-white">E-mail</label>
                         {{ form.username }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-medium">Senha</label>
+                        <label class="form-label fw-medium text-white">Senha</label>
                         {{ form.password }}
                     </div>
                     <div class="row justify-content-center">

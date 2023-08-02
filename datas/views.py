@@ -47,7 +47,24 @@ def deletar_feriados(request, feriados_id):
 
         feriado_excluido = Feriados.objects.filter(id=feriados_id).delete()
 
-        return render(request, 'deletar/selecionar_feriados.html.html')
+        return render(request, 'deletar/sucesso_deletar.html')
+
+def deletar_todas(request):
+    if request.method == 'GET':
+
+        feriados_set = Feriados.objects.all()
+
+        context = {
+            'feriados_set': feriados_set
+        }
+
+        return render(request, 'deletar/deletar_todas.html', context=context)
+
+    elif request.method == 'POST':
+
+        feriados_excluidos = Feriados.objects.all().delete()
+
+        return render(request, 'deletar/sucesso_deletar.html')
 
 def editar_feriados(request, feriados_id):
     if request.method == 'GET':

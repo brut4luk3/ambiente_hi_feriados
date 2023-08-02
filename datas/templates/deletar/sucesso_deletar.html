@@ -30,38 +30,18 @@
         </div>
     {% else %}
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-2 align-self-center text-center">
-                <h5>Clique em uma data para excluí-la:</h5>
+            <div class="col-md-5 mb-3 align-self-center text-center">
+                <h5>Operação realizada com sucesso!</h5>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-2 overflow-auto" style="max-height: 210px">
-                <table class="table table-sm table-striped table-primary table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Data</th>
-                            <th scope="col">Descrição</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for data in feriados_cadastrados %}
-                        <tr onclick="window.location='{% url 'datas:deletar_feriados' data.pk %}';">
-                            <th scope="row">{{ data.data| date:"d/m/Y" }}</th>
-                            <td>{{ data.description }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+            <div class="row md-6 mb-2 justify-content-center">
+                <a href="{% url 'users:index' %}" class="btn btn-secondary text-white" style="width: 330px">Início</a>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="row md-6 mb-4 justify-content-center">
-                <a href="{% url 'datas:deletar_todas' %}" class="btn btn-secondary text-white" style="width: 370px">Deletar todas</a>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col md-6 mb-0 align-self-center text-center">
-                <a href="{% url 'users:index' %}">Início</a>
+                <a href="{% url 'datas:selecionar_feriados' %}" class="btn btn-secondary text-white" style="width: 330px">Deletar outras</a>
             </div>
         </div>
     {% endif %}
