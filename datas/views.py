@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from datas.models import Feriados
+from django.utils.translation import gettext_lazy as _
 
 def cadastrar_feriados(request):
     if request.method == 'GET':
@@ -11,34 +12,49 @@ def cadastrar_feriados(request):
     elif request.method == 'POST':
 
         post_data = request.POST
-        f = Feriados(
-            usuario=request.user,
-            data=post_data.get('data'),
-            description=post_data.get('description')
-        )
+        informed_date = post_data.get('data')
 
-        f.save()
+        if Feriados.objects.filter(data=informed_date).exists():
+            date_error = {
+                'equal_date': _('Esta data já foi cadastrada neste banco de dados!')
+            }
+            return render(request, 'cadastrar/cadastrar_feriados.html', {'date_error': date_error})
+        else:
 
-        messages.success(request, 'Nova data cadastrada com sucesso!')
+            f = Feriados(
+                usuario=request.user,
+                data=post_data.get('data'),
+                description=post_data.get('description')
+            )
 
-        return redirect(reverse('datas:cadastrar_feriados'))
+            f.save()
+
+            messages.success(request, 'Nova data cadastrada com sucesso!')
+
+            return redirect(reverse('datas:cadastrar_feriados'))
 
 def selecionar_feriados(request):
     feriados_cadastrados = request.user.feriados_set.all()
+    quantidade_datas = feriados_cadastrados.count()
 
     context = {
-        'feriados_cadastrados': feriados_cadastrados
+        'feriados_cadastrados': feriados_cadastrados,
+        'quantidade_datas': quantidade_datas
     }
 
     return render(request, 'deletar/selecionar_feriados.html', context=context)
 
 def deletar_feriados(request, feriados_id):
+    feriados_cadastrados = request.user.feriados_set.all()
+    quantidade_datas = feriados_cadastrados.count()
+
     if request.method == 'GET':
 
         feriado = get_object_or_404(Feriados, pk=feriados_id)
 
         context = {
-            'feriado': feriado
+            'feriado': feriado,
+            'quantidade_datas': quantidade_datas
         }
 
         return render(request, 'deletar/deletar_feriados.html', context=context)
@@ -79,6 +95,11 @@ def editar_feriados(request, feriados_id):
 
     elif request.method == 'POST':
 
-        feriado_editado = Feriados.objects.filter(id=feriados_id).update()
+        post_data_edit = request.POST
 
-        return render(request, 'editar/editar_feriados.html')
+        form_id_dataedit = request.POST['dataedit']
+        form_id_descriptionedit = request.POST['descriptionedit']
+
+        feriado_editado = Feriados.objects.filter(id=feriados_id).update(data=form_id_dataedit, description=form_id_descriptionedit)
+
+        return render(request, 'editar/sucesso_editar.html')

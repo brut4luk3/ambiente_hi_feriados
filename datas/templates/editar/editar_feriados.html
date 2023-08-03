@@ -31,32 +31,55 @@
     {% else %}
         <div class="row justify-content-center">
             <div class="col-md-5 mb-2 align-self-center text-center">
-                <h5>Clique em uma data para excluí-la:</h5>
+                <h5>Você editará a seguinte data:</h5>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-5 mb-2 overflow-auto" style="max-height: 210px">
-                <table class="table table-sm table-striped table-primary table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Data</th>
-                            <th scope="col">Descrição</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for data in feriados_cadastrados %}
-                        <tr onclick="window.location='{% url 'datas:deletar_feriados' data.pk %}';">
-                            <th scope="row">{{ data.data| date:"d/m/Y" }}</th>
-                            <td>{{ data.description }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+            <div class="col-md-5 mb-2 align-self-center text-center">
+                <h4>{{ feriado.data }}</h4>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="row md-6 mb-4 justify-content-center">
-                <button type="submit" class="btn btn-secondary text-white" style="width: 350px">Deletar todas</button>
+            <div class="col-md-5 mb-2 align-self-center text-center">
+                <h5>Preencha os campos abaixo para editar esta data:</h5>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <label for="inputDataEdit" class="form-label fw-medium text-white">Nova data</label>
+                        <input
+                                type="date"
+                                name="dataedit"
+                                class="form-control rounded-3"
+                                id="inputDataEdit"
+                                required
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputDescriptionEdit" class="form-label fw-medium text-white">Descrição</label>
+                        <input
+                                type="text"
+                                name="descriptionedit"
+                                class="form-control rounded-3"
+                                id="inputDescriptionEdit"
+                                placeholder="Digite a nova descrição deste feriado"
+                                required
+                        >
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="row md-6 mb-4 justify-content-center">
+                            <button type="submit" class="btn btn-secondary text-white" style="width: 370px">Confirmar</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col md-6 mb-0 align-self-center text-center">
+                            <a href="{% url 'users:index' %}">Início</a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     {% endif %}

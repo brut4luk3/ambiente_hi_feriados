@@ -29,31 +29,39 @@
             </div>
         </div>
     {% else %}
-        <div class="row justify-content-center">
-            <div class="col-md-5 mb-2 align-self-center text-center">
-                <h5>Clique em uma data para editá-la:</h5>
+        {% if quantidade_datas == 0 %}
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-2 align-self-center text-center">
+                    <h5>Ainda não há datas cadastradas</h5>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-5 mb-2 overflow-auto" style="max-height: 210px">
-                <table class="table table-sm table-striped table-primary table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Data</th>
-                            <th scope="col">Descrição</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for data in listar_datas %}
-                        <tr onclick="window.location='{% url 'datas:editar_feriados' data.pk %}';">
-                            <th scope="row">{{ data.data| date:"d/m/Y" }}</th>
-                            <td>{{ data.description }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        {% else %}
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-2 align-self-center text-center">
+                    <h5>Clique em uma data para editá-la:</h5>
+                </div>
             </div>
-        </div>
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-2 overflow-auto" style="max-height: 210px">
+                    <table class="table table-sm table-striped table-primary table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Data</th>
+                                <th scope="col">Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in listar_datas %}
+                            <tr onclick="window.location='{% url 'datas:editar_feriados' data.pk %}';">
+                                <th scope="row">{{ data.data| date:"d/m/Y" }}</th>
+                                <td>{{ data.description }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
         <div class="row justify-content-center">
             <div class="col-md-5 mb-2">
                 <div class="row justify-content-center">

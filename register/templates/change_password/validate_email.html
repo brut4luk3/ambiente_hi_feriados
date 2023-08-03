@@ -29,43 +29,47 @@
             </div>
         </div>
     {% else %}
-        {% if form.errors %}
-            <div class="row justify-content-center">
-                <div class="col-md-5 mb-2">
-                    <script>
-                        alert("O e-mail ou senha estão incorretos! Tente novamente.");
-                    </script>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2 align-self-center text-center">
+                <h4>Redefinição de senha</h4>
             </div>
-        {% endif %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-2 align-self-center text-center">
+                <h5>Digite o e-mail da sua conta:</h5>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-5 mb-2">
-                <form action="{% url 'login' %}" method="POST">
+                <form action="" method="POST">
                     {% csrf_token %}
-                    <div class="mb-2">
-                        <label class="form-label fw-medium text-white">E-mail</label>
-                        {{ form.username }}
-                    </div>
                     <div class="mb-3">
-                        <label class="form-label fw-medium text-white">Senha</label>
-                        {{ form.password }}
+                        <label for="inputValidateEmail" class="form-label fw-medium text-white">E-mail</label>
+                        <input
+                                type="email"
+                                name="validateemail"
+                                class="form-control rounded-3"
+                                id="inputValidateEmail"
+                                placeholder="Informe seu e-mail"
+                                required
+                        >
                     </div>
                     <div class="row justify-content-center">
-                        <div class="row md-6 mb-2 justify-content-center">
-                            <button type="submit" class="btn btn-secondary text-white" style="width: 350px">Login</button>
+                        <div class="row md-6 mb-4 justify-content-center">
+                            <button type="submit" class="btn btn-secondary text-white" style="width: 350px">Confirmar</button>
                         </div>
                     </div>
                 </form>
                 <div class="row justify-content-center">
-                    <div class="row md-6 mb-2 justify-content-center">
-                        <a href="{% url 'register:new' %}" class="btn btn-secondary text-white" style="width: 350px">Cadastre-se</a>
+                    <div class="col md-6 mb-0 align-self-center text-center">
+                        <a href="{% url 'login' %}">Início</a>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="row md-6 mb-2 justify-content-center">
-                        <p class="mt-3">Esqueceu sua senha? <a href="{% url 'register:validate_email' %}">Clique aqui!</a></p>
-                    </div>
-                </div>
+                {% if unknown_email %}
+                    <script>
+                        alert("{{ unknown_email.unknown_email }}");
+                    </script>
+                {% endif %}
             </div>
         </div>
     {% endif %}

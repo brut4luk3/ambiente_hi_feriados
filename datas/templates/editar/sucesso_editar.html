@@ -34,19 +34,16 @@
                 <h5>Operação realizada com sucesso!</h5>
             </div>
         </div>
-        {% if quantidade_datas > 1 %}
-            <div class="row justify-content-center">
-                <div class="row md-6 mb-4 justify-content-center">
-                    <a href="{% url 'datas:selecionar_feriados' %}" class="btn btn-secondary text-white" style="width: 330px">Deletar outras</a>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-3 align-self-center text-center">
+                <p class="fw-medium">Clique no botão abaixo para retornar ao início:</p>
             </div>
-        {% else %}
-            <div class="row justify-content-center">
-                <div class="row md-6 mb-2 justify-content-center">
-                    <a href="{% url 'users:index' %}" class="btn btn-secondary text-white" style="width: 330px">Início</a>
-                </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="row md-6 mb-2 justify-content-center">
+                <a href="{% url 'users:index' %}" class="btn btn-secondary text-white" style="width: 300px">Início</a>
             </div>
-        {% endif %}
+        </div>
     {% endif %}
 </div>
 {% endblock %}

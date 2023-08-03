@@ -38,38 +38,33 @@
             <div class="col-md-5 mb-2">
                 <form action="" method="POST">
                     {% csrf_token %}
-                        <div class="mb-2">
-                            <label for="inputData" class="form-label fw-medium text-white">Data</label>
-                            <input
-                                    type="date"
-                                    name="data"
-                                    class="form-control rounded-3"
-                                    id="inputData"
-                                    required
-                            >
+                    <div class="mb-2">
+                        <label for="inputData" class="form-label fw-medium text-white">Data</label>
+                        <input
+                                type="date"
+                                name="data"
+                                class="form-control rounded-3"
+                                id="inputData"
+                                required
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputDescription" class="form-label fw-medium text-white">Descrição</label>
+                        <input
+                                type="text"
+                                name="description"
+                                class="form-control rounded-3"
+                                id="inputDescription"
+                                placeholder="Descreva este feriado"
+                                required
+                        >
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="row md-6 mb-4 justify-content-center">
+                            <button type="submit" class="btn btn-secondary text-white" style="width: 350px">Cadastrar</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="inputDescription" class="form-label fw-medium text-white">Descrição</label>
-                            <input
-                                    type="text"
-                                    name="description"
-                                    class="form-control rounded-3"
-                                    id="inputDescription"
-                                    placeholder="Descreva este feriado"
-                                    required
-                            >
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="row md-6 mb-4 justify-content-center">
-                                <button type="submit" class="btn btn-secondary text-white" style="width: 350px">Cadastrar</button>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col md-6 mb-0 align-self-center text-center">
-                                <a href="{% url 'users:index' %}">Início</a>
-                            </div>
-                        </div>
-                        <script>
+                    </div>
+                    <script>
                             document.addEventListener("DOMContentLoaded", function() {
                                 const notificationDiv = document.querySelector(".notification");
                                 if (notificationDiv) {
@@ -81,17 +76,27 @@
                                     }
                                 }
                             });
-                        </script>
-                        <div class="row justify-content-center">
-                            <div class="notification align-self-center text-center text-white">
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <p class="notification-message">{{ message }}</p>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
+                    </script>
+                    <div class="row justify-content-center">
+                        <div class="notification align-self-center text-center text-white">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="notification-message">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
                         </div>
+                    </div>
                 </form>
+                <div class="row justify-content-center">
+                    <div class="col md-6 mb-0 align-self-center text-center">
+                        <a href="{% url 'users:index' %}">Início</a>
+                    </div>
+                </div>
+                {% if date_error %}
+                    <script>
+                        alert("{{ date_error.equal_date }}");
+                    </script>
+                {% endif %}
             </div>
         </div>
     {% endif %}
