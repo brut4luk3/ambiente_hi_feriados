@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.contrib import messages
 from datas.models import Feriados
 from django.utils.translation import gettext_lazy as _
+from datetime import datetime
+from django.utils import timezone
 
 def cadastrar_feriados(request):
     if request.method == 'GET':
@@ -14,6 +16,12 @@ def cadastrar_feriados(request):
         post_data = request.POST
         informed_date = post_data.get('data')
 
+        informed_datetime = datetime.strptime(informed_date, '%Y-%m-%d')
+
+        current_year = timezone.now().year
+
+        updated_date = informed_datetime.replace(year=current_year)
+
         if Feriados.objects.filter(data=informed_date).exists():
             date_error = {
                 'equal_date': _('Esta data já foi cadastrada neste banco de dados!')
@@ -23,7 +31,7 @@ def cadastrar_feriados(request):
 
             f = Feriados(
                 usuario=request.user,
-                data=post_data.get('data'),
+                data=updated_date,
                 description=post_data.get('description')
             )
 
