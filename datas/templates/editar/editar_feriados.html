@@ -79,6 +79,11 @@
                             <a href="{% url 'users:index' %}">Início</a>
                         </div>
                     </div>
+                    {% if date_error %}
+                        <script>
+                            alert("{{ date_error.equal_date }}");
+                        </script>
+                    {% endif %}
                 </form>
             </div>
         </div>

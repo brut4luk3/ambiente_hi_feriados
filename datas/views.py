@@ -103,11 +103,23 @@ def editar_feriados(request, feriados_id):
 
     elif request.method == 'POST':
 
-        post_data_edit = request.POST
-
         form_id_dataedit = request.POST['dataedit']
         form_id_descriptionedit = request.POST['descriptionedit']
 
-        feriado_editado = Feriados.objects.filter(id=feriados_id).update(data=form_id_dataedit, description=form_id_descriptionedit)
+        informed_datetime = datetime.strptime(form_id_dataedit, '%Y-%m-%d')
 
-        return render(request, 'editar/sucesso_editar.html')
+        current_year = timezone.now().year
+
+        updated_date = informed_datetime.replace(year=current_year)
+
+        if Feriados.objects.filter(data=updated_date).exists():
+            date_error = {
+                'equal_date': _('Esta data já foi cadastrada neste banco de dados!')
+            }
+            return render(request, 'editar/editar_feriados.html', {'date_error': date_error})
+
+        else:
+
+            feriado_editado = Feriados.objects.filter(id=feriados_id).update(data=updated_date, description=form_id_descriptionedit)
+
+            return render(request, 'editar/sucesso_editar.html')
