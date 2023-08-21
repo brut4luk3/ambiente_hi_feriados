@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'base_page.apps.BasePageConfig',
     'register.apps.RegisterConfig',
     'datas.apps.DatasConfig',
+    'api_view.apps.ApiViewConfig',
 ]
 
 MIDDLEWARE = [
