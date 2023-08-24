@@ -12,19 +12,25 @@ from datas.models import CustomUser, Feriados
 
 app = Flask(__name__)
 
-@app.route('/api/check_holiday', methods=['POST'])
-def check_holiday():
+@app.route('/api/check_feriado', methods=['POST'])
+def check_feriado():
     try:
         token = request.json.get('token')
         data_atual = request.json.get('data_atual')
 
         if token is None or data_atual is None:
-            return jsonify({'error': 'Os campos Token e data_atual são obrigatórios.'}), 400
+            response = {
+                'erro': 'Os campos Token e data_atual são obrigatórios.'
+            }
+            return jsonify(response), 400
 
         try:
             user = CustomUser.objects.get(token=token)
         except ObjectDoesNotExist:
-            return jsonify({'error': 'Token inválido!'}), 400
+            response = {
+                'erro': 'Token inválido!'
+            }
+            return jsonify(response), 400
 
         try:
             data_atual = datetime.strptime(data_atual, '%d/%m/%Y').date()
@@ -32,14 +38,24 @@ def check_holiday():
             try:
                 data_atual = datetime.strptime(data_atual, '%Y-%m-%d').date()
             except ValueError:
-                return jsonify({'error': 'Esta data está num formato inválido!'}), 400
+                response = {
+                    'erro': 'Esta data está num formato inválido!'
+                }
+                return jsonify(response), 400
 
         feriado = Feriados.objects.filter(usuario=user, data=data_atual).first()
 
         if feriado:
-            return jsonify({'description': feriado.description})
+            response = {
+                'feriado': True,
+                'description': feriado.description
+            }
+            return jsonify(response)
         else:
-            return jsonify({'message': 'Não há feriados nesta data!'}), 200
+            response = {
+                'feriado': False
+            }
+            return jsonify(response), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
