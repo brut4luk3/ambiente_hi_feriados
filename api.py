@@ -30,7 +30,7 @@ def check_feriado():
             response = {
                 'erro': 'Token inválido!'
             }
-            return jsonify(response), 400
+            return jsonify(response), 401
 
         try:
             data_atual = datetime.strptime(data_atual, '%d/%m/%Y').date()
