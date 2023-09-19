@@ -74,6 +74,28 @@
                         <a href="{% url 'datas:selecionar_feriados' %}" class="btn btn-secondary text-white" style="width: 380px">Deletar feriados</a>
                     </div>
                 </div>
+                <div class="row justify-content-center">
+                    <div class="row md-6 mb-2 justify-content-center">
+                        <code id="curlCode">
+                            curl -X POST -H "Content-Type: application/json" -d '{ "token": "9d4c6ba9-dd10-4c95-9424-49b4a38e4a4e", "data_atual": "24/09/2023" }' http://localhost:5000/api/check_feriado
+                        </code>
+                    </div>
+                    <div class="row md-6 mb-2 justify-content-center">
+                        <button class="btn btn-secondary text-white" onclick="copiarCurl('curlCode')" style="width: 380px">Copiar cURL</button>
+                    </div>
+                    <script>
+                        function copiarCurl(id) {
+                            var curlCode = document.getElementById(id);
+                            var textoCurl = curlCode.innerText;
+
+                            navigator.clipboard.writeText(textoCurl).then(function() {
+                                alert('cURL copiada com sucesso!');
+                            }, function() {
+                                alert('Erro ao copiar a cURL.');
+                            });
+                        }
+                    </script>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center">
