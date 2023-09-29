@@ -1,18 +1,15 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
-from .models import CustomUser
 
-class CustomAuthenticationForm(AuthenticationForm):
-    email = forms.EmailField(
+class CustomAuthenticationForm(forms.Form):
+    username = forms.EmailField(
         max_length=254,
-        widget=forms.EmailInput(),
+        widget=forms.EmailInput(attrs={'autofocus': True, 'class': 'form-control rounded-3'}),
         label=_("E-mail"),
         error_messages={'required': 'Informe o seu e-mail.'}
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control rounded-3'}),
         label=_("Senha"),
         strip=False,
         error_messages={'required': 'Informe a sua senha.'},

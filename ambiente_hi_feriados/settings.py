@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s7nxrv!l1r29vq2b@4jazhubql1g6#m3hicfi(ah)v-(z99aa3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users.apps.UsersConfig',
-    'base_page.apps.BasePageConfig',
     'register.apps.RegisterConfig',
     'datas.apps.DatasConfig',
     'api_view.apps.ApiViewConfig',
@@ -82,10 +81,16 @@ WSGI_APPLICATION = 'ambiente_hi_feriados.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'check_feriados',
+        'USER': 'root',
+        'PASSWORD': 'Omega_200',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
     }
 }
+
 
 
 # Password validation
@@ -135,6 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/users/'
 
-LOGOUT_REDIRECT_URL = '/registration/login/'
+LOGOUT_REDIRECT_URL = '/users/login/'
 
 AUTH_USER_MODEL = 'users.CustomUser'

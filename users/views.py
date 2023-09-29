@@ -1,4 +1,11 @@
 from django.shortcuts import render
+from users.forms import CustomAuthenticationForm
+
+def login(request):
+
+    form = CustomAuthenticationForm()
+
+    return render(request, 'registration/login.html', {'form': form})
 
 def index(request):
 
