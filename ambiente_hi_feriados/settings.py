@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'ambiente_hi_feriados.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT')
+        'NAME': "railway",
+        'USER': "postgres",
+        'PASSWORD': "6eDaaebFeaCBfdDG3221afFC6bDC435b",
+        'HOST': "viaduct.proxy.rlwy.net",
+        'PORT': "11455"
     }
 }
 
