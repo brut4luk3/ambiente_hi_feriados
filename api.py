@@ -9,7 +9,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ambiente_hi_feriados.settings')
 django.setup()
 
 from datas.models import CustomUser, Feriados
-
 app = Flask(__name__)
 
 @app.route('/api/check_feriado', methods=['POST'])
